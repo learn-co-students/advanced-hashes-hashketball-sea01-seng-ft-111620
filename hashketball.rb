@@ -1,4 +1,4 @@
-# Write your code below game_hash
+
 def game_hash
   {
     home: {
@@ -126,4 +126,68 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored(name)
+  game_hash.select do |key, innerHash|
+    innerHash[:players].select { |player| return player[:points] if player[:player_name] == name }
+  end
+end
+
+def shoe_size(name)
+  game_hash.select do |key, innerHash|
+    innerHash[:players].select { |player| return player[:shoe] if player[:player_name] == name }
+  end
+end
+
+def team_colors(teamName)
+  game_hash.select do |key, innerHash|
+    return innerHash[:colors] if innerHash[:team_name] == teamName
+  end
+end
+
+def team_names
+  teams = []
+  game_hash.select do |key, innerHash|
+    teams << innerHash[:team_name]
+  end
+  teams
+end
+
+def player_numbers(teamName)
+  numbers = []
+  game_hash.select do |key, innerHash|
+    if innerHash[:team_name] == teamName
+      innerHash[:players].each do |player|
+        numbers << player[:number]
+      end
+    end
+  end
+  numbers
+end
+
+def player_stats(playerName)
+  game_hash.select do |key, innerHash|
+    innerHash[:players].select { |player| return player if player[:player_name] == playerName }
+  end
+end
+
+def big_shoe_rebounds
+  shoeSize = 0
+  reboundCount = 0
+  
+  game_hash.select do |key, innerHash|
+    innerHash[:players].select do |player|
+      if player[:shoe] > shoeSize
+        shoeSize = player[:shoe]
+        reboundCount = player[:rebounds]
+      end
+    end
+  end
+  return reboundCount
+end
+
+
+
+
+
+
+
