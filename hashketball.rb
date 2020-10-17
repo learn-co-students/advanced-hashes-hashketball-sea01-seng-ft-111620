@@ -1,4 +1,4 @@
-# Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -126,4 +126,95 @@ def game_hash
   }
 end
 
-# Write code here
+def players
+  players = game_hash[:home][:players] + game_hash[:away][:players]
+end
+
+def num_points_scored player_name
+  players.each do |hash|
+    hash.each_value do |v| 
+      if v == player_name
+      return hash[:points]
+      end
+    end
+  end
+end
+
+def shoe_size player_name
+  players.each do |hash|
+    hash.each_value do |v| 
+      if v == player_name
+      return hash[:shoe]
+      end
+    end
+  end
+end
+
+def team_colors team_name
+  game_hash.each_key do |k|
+    if game_hash[k][:team_name] == team_name
+      return game_hash[k][:colors]
+    end 
+  end  
+end  
+
+def team_names
+  array = []
+  game_hash.each_key do |k|
+    array << game_hash[k].fetch(:team_name)
+  end
+  array
+end
+
+def player_numbers team
+  array = []
+  game_hash.each_key do |k|
+    if game_hash[k][:team_name] == team
+      game_hash[k][:players].each do |hash|
+        array << hash[:number]
+      end
+    end  
+  end 
+  array
+end
+
+def player_stats name
+  game_hash.each do |k,v|
+    game_hash[k][:players].each do |hash| 
+      if hash[:player_name] == name
+        return hash
+      end  
+    end
+  end  
+end
+
+def big_shoe_rebounds
+  players.max_by {|hash| hash[:shoe]}[:rebounds]
+end  
+
+def most_points_scored
+  players.max_by {|hash| hash[:points]}[:player_name]
+end  
+
+def winning_team
+  home_points = 0
+  away_points = 0
+  game_hash[:home][:players].each do |hash|
+    home_points = home_points + hash[:points]
+  end
+  game_hash[:away][:players].each do |hash|
+    away_points = away_points + hash[:points]
+  end
+  if home_points > away_points
+    game_hash[:home][:team_name]  
+    else game_hash[:away][:team_name]
+  end
+end  
+
+def player_with_longest_name
+  players.max_by {|hash| hash[:player_name].length}[:player_name]
+end  
+
+def long_name_steals_a_ton?
+  players.max_by {|hash| hash[:steals]}[:player_name] == player_with_longest_name
+end
