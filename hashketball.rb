@@ -169,7 +169,17 @@ def team_colors(team)
 end
 
 def team_names(team)
+  teams_array = []
 
+  game_hash.each do |teams, value1|
+    #binding.pry
+    game_hash[teams].each do |name, value2|
+      if game_hash[teams][name] == team
+        teams_array << game_hash[teams][name]
+      end
+    end
+  end
+  teams_array
 end
 
 def player_numbers(team)
