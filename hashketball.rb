@@ -131,7 +131,6 @@ def num_points_scored(player)
   game_hash
   game_hash.each do |team, value1|
     game_hash[team][:players].each do |individual|
-    #  binding.pry
       if individual[:player_name] == player
         return  individual[:points]
       end
@@ -144,7 +143,6 @@ def shoe_size(player)
   game_hash
   game_hash.each do |team, value1|
     game_hash[team][:players].each do |individual|
-    #  binding.pry
       if individual[:player_name] == player
         return  individual[:shoe]
       end
@@ -155,7 +153,6 @@ end
 def team_colors(team)
   game_hash
   game_hash.each do |teams, value1|
-    #binding.pry
     game_hash[teams].each do |name, value2|
       if game_hash[teams][name] == team
         game_hash[teams].each do |colors, value3|
@@ -168,28 +165,51 @@ def team_colors(team)
   end
 end
 
-def team_names(team)
+def team_names
   teams_array = []
-
   game_hash.each do |teams, value1|
-    #binding.pry
-    game_hash[teams].each do |name, value2|
-      if game_hash[teams][name] == team
-        teams_array << game_hash[teams][name]
-      end
-    end
+    teams_array << game_hash[teams][:team_name]
   end
   teams_array
 end
 
 def player_numbers(team)
-
+  team_numbers = []
+  game_hash
+  game_hash.each do |teams, value1|
+    if game_hash[teams][:team_name] == team
+        game_hash[teams][:players].each do |individual|
+          team_numbers <<  individual[:number]
+        end
+    end
+  end
+  team_numbers
 end
 
 def player_stats(player)
-
+  game_hash
+  game_hash.each do |team, value1|
+    game_hash[team][:players].each do |individual|
+      if individual[:player_name] == player
+        return individual
+      end
+    end
+  end
 end
 
-def big_shoe_rebounds(biggest_shoe)
-
+def big_shoe_rebounds
+  biggest_shoe = 0
+  game_hash
+  game_hash.each do |team, value1|
+    game_hash[team][:players].each do |individual|
+      if individual[:shoe] > biggest_shoe
+        biggest_shoe = individual[:shoe]
+      end
+    end
+    game_hash[team][:players].each do |individual|
+      if individual[:shoe] == biggest_shoe
+        return individual[:rebounds]
+      end
+    end
+  end
 end
