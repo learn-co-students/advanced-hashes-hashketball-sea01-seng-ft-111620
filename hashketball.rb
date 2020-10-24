@@ -134,7 +134,7 @@ def num_points_scored player_name
   players.each do |hash|
     hash.each_value do |v| 
       if v == player_name
-      return hash[:points]
+        return hash[:points]
       end
     end
   end
@@ -189,11 +189,11 @@ def player_stats name
 end
 
 def big_shoe_rebounds
-  players.max_by {|hash| hash[:shoe]}[:rebounds]
+  players.max_by{|hash| hash[:shoe]}[:rebounds]
 end  
 
 def most_points_scored
-  players.max_by {|hash| hash[:points]}[:player_name]
+  players.max_by{|hash| hash[:points]}[:player_name]
 end  
 
 def winning_team
@@ -207,7 +207,8 @@ def winning_team
   end
   if home_points > away_points
     game_hash[:home][:team_name]  
-    else game_hash[:away][:team_name]
+  else 
+    game_hash[:away][:team_name]
   end
 end  
 
