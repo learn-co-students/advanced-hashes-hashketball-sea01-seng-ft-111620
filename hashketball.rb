@@ -162,19 +162,19 @@ def team_names
 end
 
 def player_numbers(input)
-  output = []
+  player_output = []
   game_hash.each do |team, team_info|
     if team_info[:team_name] == input
       team_info.each do |key, value|
         if key == :players
           value.each do |player|
-          output << (player[:number])
+          player_output << (player[:number])
           end
         end
       end
     end
   end
-output
+player_output
 end
 
 def player_stats(input)
