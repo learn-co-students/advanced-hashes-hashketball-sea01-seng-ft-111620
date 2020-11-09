@@ -126,6 +126,7 @@ def game_hash
   }
 end
 
+
 def num_points_scored(name)
   game_hash.each do |team, team_info|
     team_info[:players].each do |player|
@@ -156,11 +157,13 @@ def team_colors(team)
   end
 end
 
+
 def team_names
   game_hash.map do |team, team_info|
     team_info[:team_name]
   end
 end
+
 
 def player_numbers(which_team)
   jersey_numbers = []
@@ -178,6 +181,7 @@ def player_numbers(which_team)
   return jersey_numbers
 end
 
+
 def player_stats(player_input)
   game_hash.each do |team, team_info|
     team_info[:players].each do |info|
@@ -189,8 +193,9 @@ def player_stats(player_input)
 end
   
 def big_shoe_rebounds
-  biggest_shoe = 0;
-  big_rebound = 0;
+  
+  biggest_shoe = nil;
+  big_rebound = nil;
   
   game_hash.each do |team, team_info|
     team_info[:players].each do |player_values|
@@ -198,8 +203,7 @@ def big_shoe_rebounds
         biggest_shoe = player_values[:shoe]
         big_rebound = player_values[:rebounds]
       end
-      #binding.pry
-end
+    end
   end
-  return big_rebound
+    return big_rebound
 end
