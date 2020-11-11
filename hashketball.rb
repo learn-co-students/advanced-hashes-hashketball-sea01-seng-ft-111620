@@ -184,24 +184,20 @@ def player_stats(player_name)
   end
 end
 
-def big_shoe_player_key
+def big_shoe_rebounds
   largest_shoe_size = nil
-  largest_shoe_size_key = nil
+  largest_shoe_rebounds = nil
   game_hash.each do |location, team_data|
     team_data[:players].each do |attribute|
        if largest_shoe_size == nil || attribute[:shoe] > largest_shoe_size
          largest_shoe_size = attribute[:shoe]
-         largest_shoe_size_key = attribute
+         largest_shoe_rebounds = attribute[:rebounds]
        end
     end
   end
- return largest_shoe_size_key
+ return largest_shoe_rebounds
 end
 
-
-def big_shoe_rebounds
-  big_shoe_player_key[:rebounds]
-end
 
 #Bonus Questions
 
@@ -229,9 +225,9 @@ def winning_team
       home_team_score << key[:points]
     end
   if away_team_score.sum > home_team_score.sum
-    puts game_hash[:away][:team_name]
+    p game_hash[:away][:team_name]
   else 
-    puts game_hash[:home][:team_name]
+    p game_hash[:home][:team_name]
   end
 end
 
