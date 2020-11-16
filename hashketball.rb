@@ -127,13 +127,11 @@ def game_hash
 end
 
 def num_points_scored(player_name)
-  points_total = nil
-  
-  game_hash.each do |team, points_hash|
-    players_array = points_hash[:players]
-    players_array.each do |player_points_hash|
-      if player_points_hash[:player_name] == player_name
-        points_total = player_points_hash[:points]
+  points_total = []
+  game_hash.each do |team, players_hash|
+    players_hash[:players].each do |player_points|
+      if player_points[:player_name] == player_name
+        points_total = player_points[:points]
       end
     end
   end
@@ -142,13 +140,11 @@ end
 
 
 def shoe_size(player_name)
-  shoe = nil
-  
-  game_hash.each do |team, shoe_hash|
-    players_array = shoe_hash[:players]
-    players_array.each do |players_shoe_hash|
-      if players_shoe_hash[:player_name] == player_name
-        shoe = players_shoe_hash[:shoe]
+  shoe = []
+  game_hash.each do |team, players_hash|
+  players_hash[:players].each do |shoe_hash|
+      if shoe_hash[:player_name] == player_name
+        shoe = shoe_hash[:shoe]
       end
     end
   end
